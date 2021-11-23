@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import  {BrowserRouter as Router, Route } from 'react-router-dom';
+import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './views/Home';
 
@@ -9,6 +9,7 @@ const App = () => {
         <>
             <Header />
             <Home />
+            <Footer />
         </>
     )
 }
