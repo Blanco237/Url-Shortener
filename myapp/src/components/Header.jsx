@@ -1,6 +1,10 @@
 import React from 'react';
 import { useState, useEffect }  from 'react';
+import { Link } from 'react-router-dom';
+
 import classes from '../assets/styles/components/header.module.css';
+
+import { Spin as Harmburger } from 'hamburger-react'
 
 
 const Header = () => {
@@ -9,19 +13,12 @@ const Header = () => {
     const [width, setWidth] = useState(0);
     const [showMenu, setShowMenu] = useState(false);
 
-    // window.addEventListener("resize", () => {
-    //     if(window.outerWidth<600){
-    //         setIsMobile(true);
-    //     }
-    //     else{
-    //         setIsMobile(false);
-    //     }
-    //     console.log(`${window.outerWidth} : ${isMobile}`);
-    // });
+    const linkStyles = { textDecoration: 'none', color: 'inherit' };
 
     window.addEventListener("resize", () => {
         setWidth(window.innerWidth);
-    })
+    });
+ 
 
     useEffect(() => {
         setWidth(window.innerWidth);
@@ -37,16 +34,16 @@ const Header = () => {
     return (
         <div className={classes.header}>
             <div className={classes.logo}>
-                Goo.Lnk
+                <Link to="/" style={linkStyles}>Goo.Lnk</Link>
             </div>
             <div className={classes.header__message}>
                 A simple Url shortener
             </div>
-            {isMobile && <div onClick={() => setShowMenu(!showMenu)}>MENU</div>}
+            {isMobile && <div><Harmburger direction="left" toggle={setShowMenu} toggled={showMenu} size={20}/></div>}
             <div className={`${classes.links} ${isMobile? `${classes.mobile}`:""} ${showMenu? `${classes.show}`:""}`}>
-                <li>Login</li>
-                <li>Register</li>
-                <li>FAQS</li>
+                <li><Link to="/login" style={linkStyles}>Login</Link></li>
+                <li><Link to="/register" style={linkStyles}>Register</Link></li>
+                <li><Link to="/faqs" style={linkStyles}>FAQS</Link></li>
             </div>
         </div>
     )
