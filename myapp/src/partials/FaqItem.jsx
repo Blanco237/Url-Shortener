@@ -14,7 +14,7 @@ const FaqItem = ({question, answer}) => {
                      <div>
                          {question}
                      </div>
-                     <div>
+                     <div className={classes.icon}>
                          <FontAwesomeIcon icon={faPlus} transform={{ rotate: 0 }} />
                      </div>
                 </div>;
@@ -23,7 +23,7 @@ const FaqItem = ({question, answer}) => {
     <div>
         {question}
     </div>
-    <div>
+    <div className={classes.icon}>
         <FontAwesomeIcon icon={faPlus} transform={{ rotate: 42 }} />
     </div>
 </div>;

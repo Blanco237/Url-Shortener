@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import classes from '../assets/styles/views/auth.module.css';
 
+import GetData from '../components/GetData';
 
 import logo from '../assets/images/GoogleLogo.svg';
 import { createUser,googleSignIn } from '../firebaseUtils';
@@ -12,6 +13,8 @@ const Register = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
+    const [showGetData, setShowGetData] = useState(false);
+    const [user, setUser] = useState(null);
 
     function checkValidEntry(){
         if(email.length<0 || password.length<0){
@@ -39,10 +42,12 @@ const Register = () => {
         createUser(email,password);
     }
 
-    function loginWithGoogle(){
+    async function loginWithGoogle(){
         let size = window.innerWidth;
         let state = size<600? 'mobile' : 'desktop';
-        googleSignIn(state);
+        let t = await googleSignIn(state);
+        setUser(t);
+        setShowGetData(true);
     }
 
     return (
@@ -62,6 +67,7 @@ const Register = () => {
                 </form>
                 <p className={classes.options}>Already have an Account? <span>Login</span></p>
             </div>
+            { showGetData && <GetData user={user}/> }
         </div>
     )
 }

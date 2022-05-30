@@ -7,21 +7,22 @@ import { getUserData } from './firebaseUtils';
 const auth = getAuth();
 export const UserContext = createContext();
 
-const UserProvider = () => {
+const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState(auth.currentUser);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        let data = getUserData(user);
-        setUser(data);
+        setUser(user);
       } else {
         setUser(null);
       }
     });
     
     return (
-        <UserContext.Provider value={user}/>
+        <UserContext.Provider value={{user , setUser}} >
+            {children}
+        </UserContext.Provider>
     )
 }
 

@@ -24,7 +24,7 @@ const App = () => {
 
     return (
         <>
-        <UserProvider/>
+        <UserProvider>
             <Router>
                     <Header />
                     <Switch>
@@ -36,6 +36,7 @@ const App = () => {
                     </Switch>
                     <Footer />
             </Router>
+        </UserProvider>
         </>
     )
 }

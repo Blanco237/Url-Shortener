@@ -10,7 +10,7 @@ import { Spin as Harmburger } from 'hamburger-react'
 
 const Header = () => {
 
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const [isMobile,setIsMobile] = useState(false);
     const [width, setWidth] = useState(0);
@@ -31,7 +31,6 @@ const Header = () => {
         else{
             setIsMobile(false);
         }
-        console.log(`${width} : ${isMobile}`);
     },[width]);
 
     return (

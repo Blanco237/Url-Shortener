@@ -56,6 +56,8 @@ export async function googleSignIn(state){
     try{
         if(state!='mobile'){
             let result = await signInWithPopup(auth,provider);
+            console.log(result);
+            console.log(result.user);
             return result.user;
         }
         else{
@@ -75,9 +77,9 @@ export async function googleSignIn(state){
 /******************Database Functions**********************/
 const db = getDatabase(app);
 
-export function saveUserInfo(user,username,company,position){
+export function saveUserInfo(user,company,position){
     set(ref(db,'users/'+user.uid),{
-        username: username,
+        username: user.displayName,
         email: user.email,
         company,
         position
@@ -86,10 +88,14 @@ export function saveUserInfo(user,username,company,position){
 
 export function getUserData(user){
     const userRef = ref(db,'users/'+user.uid);
+    let uData = null;
     onValue(userRef, (snapshot)=>{
         const data = snapshot.val();
-        return data;
+        console.log("In value", data)
+        uData = data;
     });
+    console.log("From firebase",uData);
+    return uData;
 }
 
 export function saveLinkData(user,links){
