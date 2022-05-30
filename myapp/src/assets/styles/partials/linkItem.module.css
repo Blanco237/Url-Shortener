@@ -1,0 +1,21 @@
+
+.linkItem:not(:last-of-type){
+    border-bottom: 2px solid var(--main-accent);
+}
+
+.linkItem{
+    text-align: left;
+    text-overflow: ellipsis;
+    /* font-size: 0.9px; */
+}
+.linkItem>p>span{
+    font-weight: bold;
+    /* font-size: 2rem; */
+}
+
+@media screen and (max-width: 600px){
+    .linkP{
+        font-size: 0.8rem;
+         /* font-weight: bolder; */
+     }
+}

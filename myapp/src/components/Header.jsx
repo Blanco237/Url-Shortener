@@ -1,13 +1,16 @@
 import React from 'react';
-import { useState, useEffect }  from 'react';
+import { useState, useEffect,useContext }  from 'react';
 import { Link } from 'react-router-dom';
 
+import { UserContext } from '../UserProvider'
 import classes from '../assets/styles/components/header.module.css';
 
 import { Spin as Harmburger } from 'hamburger-react'
 
 
 const Header = () => {
+
+    const user = useContext(UserContext);
 
     const [isMobile,setIsMobile] = useState(false);
     const [width, setWidth] = useState(0);
@@ -41,8 +44,9 @@ const Header = () => {
             </div>
             {isMobile && <div><Harmburger direction="left" toggle={setShowMenu} toggled={showMenu} size={20}/></div>}
             <div className={`${classes.links} ${isMobile? `${classes.mobile}`:""} ${showMenu? `${classes.show}`:""}`}>
-                <li><Link to="/login" style={linkStyles}>Login</Link></li>
-                <li><Link to="/register" style={linkStyles}>Register</Link></li>
+                { user ? <li><Link to='/dashboard' style={linkStyles}>Dashboard</Link></li> : <><li><Link to="/login" style={linkStyles}>Login</Link></li>
+                <li><Link to="/register" style={linkStyles}>Register</Link></li></>
+                }
                 <li><Link to="/faqs" style={linkStyles}>FAQS</Link></li>
             </div>
         </div>

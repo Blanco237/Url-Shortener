@@ -11,7 +11,7 @@ var options1 = {
     'x-rapidapi-host': 'url-shortener-service.p.rapidapi.com',
     'x-rapidapi-key': '6e56d7cab9msh7847da76d4ddcd4p167790jsn0798822d14df'
   },
-  data: {url: ' https://nmp-video-player.herokuapp.com/'}
+  data: {url: 'https://nmp-video-player.herokuapp.com/'}
 };
 
 axios.request(options1).then(function (response) {

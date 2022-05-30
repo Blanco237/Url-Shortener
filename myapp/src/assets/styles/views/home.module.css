@@ -109,7 +109,7 @@
     /* gap: 1px; */
 }
 
-.linkItem:not(last-child){
+.linkItem:not(:last-of-type){
     border-bottom: 2px solid var(--main-accent);
 }
 

@@ -7,6 +7,7 @@ import fileImg from '../assets/images/file_bundles.svg';
 import charts from '../assets/images/charts.svg';
 
 import data from '../testData';
+import LinkItem from '../partials/linkItem';
 
 const Home = () => {
     return (
@@ -30,10 +31,7 @@ const Home = () => {
                     <button className={classes.input__button}>Shorten Link</button>
                     <div className={classes.previous__links}>
                             { data.map((item,index) => {
-                                return <div key={index} className={classes.linkItem}>
-                                    <p className={classes.linkP}><span>Long Link: </span>{item.longLink}</p>
-                                    <p className={classes.linkP}><span>Short Link: </span><a href={item.shortLink}>{item.shortLink}</a></p>
-                                </div>
+                                return <LinkItem item={item} key={index} />
                             }) }
                     </div>
                 </div>
