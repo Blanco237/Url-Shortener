@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import classes from "../assets/styles/views/auth.module.css";
 
-import { UserContext } from "../UserProvider";
+import { UserContext } from "../providers/UserProvider";
 
 import logo from "../assets/images/GoogleLogo.svg";
 import { googleSignIn, signIn } from "../firebaseUtils";
