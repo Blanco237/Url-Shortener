@@ -1,5 +1,5 @@
 import React,{ useContext, useEffect, useState } from 'react'
-import { UserContext } from '../UserProvider'
+import { UserContext } from '../providers/UserProvider'
 
 import LinkItem from '../partials/linkItem'
 

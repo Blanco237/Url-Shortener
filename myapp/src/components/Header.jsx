@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect,useContext }  from 'react';
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../UserProvider'
+import { UserContext } from '../providers/UserProvider'
 import classes from '../assets/styles/components/header.module.css';
 
 import { Spin as Harmburger } from 'hamburger-react'
@@ -36,7 +36,7 @@ const Header = () => {
     return (
         <div className={classes.header}>
             <div className={classes.logo}>
-                <Link to="/" style={linkStyles}>Goo.Lnk</Link>
+                <Link to="/" style={linkStyles}>Rand.ly</Link>
             </div>
             <div className={classes.header__message}>
                 A simple Url shortener
