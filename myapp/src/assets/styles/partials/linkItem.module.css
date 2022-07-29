@@ -1,5 +1,10 @@
+.linkItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
 
-.linkItem:not(:last-of-type){
+.linkItem{
     border-bottom: 2px solid var(--main-accent);
 }
 
