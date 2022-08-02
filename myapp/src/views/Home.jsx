@@ -8,7 +8,6 @@ import classes from "../assets/styles/views/home.module.css";
 import shortLink from "../assets/images/link_shortener.svg";
 import fileImg from "../assets/images/file_bundles.svg";
 import charts from "../assets/images/charts.svg";
-import data from "../testData";
 
 //components
 import LinkItem from "../partials/linkItem";
@@ -16,18 +15,26 @@ import LinkItem from "../partials/linkItem";
 //Context
 import { LoadingContext } from "../providers/LoadingProvider";
 import { AlertContext } from "../providers/AlertProvider";
+import { LinkContext } from "../providers/LinkProvider";
 
 //utilities
 import isValidURL from "../utils/validURL";
 
 //modules
 import axios from "axios";
+import { useEffect } from "react";
 
 const Home = () => {
   const { handleLoading } = useContext(LoadingContext);
   const { handleAlert } = useContext(AlertContext);
+  const { link, addLink, fetchLinks } = useContext(LinkContext);
+
+  useEffect(() => {
+    fetchLinks();
+  },[]);
 
   const [url, setUrl] = useState("");
+  const [links, setLinks] = useState([]);
 
   const handleSubmit = async () => {
     if (!url) {
@@ -52,6 +59,7 @@ const Home = () => {
       alert(result.data.error);
     } else {
       console.log(result.data);
+      addLink(result.data);
       setUrl("");
     }
     handleLoading(false);
@@ -93,39 +101,39 @@ const Home = () => {
             </button>
           </div>
           <div className={classes.previous__links}>
-            {data.map((item, index) => {
+            {link.map((item, index) => {
               return <LinkItem item={item} key={index} />;
             })}
           </div>
         </div>
-      </div>
-      <div className={classes.createAccount}>
-        <div className={classes.createAccount__left}>
-          <img src={fileImg} alt="account" />
+        <div className={classes.createAccount}>
+          <div className={classes.createAccount__left}>
+            <img src={fileImg} alt="account" />
+          </div>
+          <div className={classes.createAccount__right}>
+            <h4>Sync and Manage all your links</h4>
+            <p>
+              With the GooLink url shortener, you can keep track of all your
+              short links and long links right from your user dashboard.
+            </p>
+            <button className={classes.createAccount__button}>
+              Create Account &#8594;
+            </button>
+          </div>
         </div>
-        <div className={classes.createAccount__right}>
-          <h4>Sync and Manage all your links</h4>
-          <p>
-            With the GooLink url shortener, you can keep track of all your short
-            links and long links right from your user dashboard.
-          </p>
-          <button className={classes.createAccount__button}>
-            Create Account &#8594;
-          </button>
-        </div>
-      </div>
-      <div className={classes.analytics}>
-        <div className={classes.analytics__left}>
-          <h4>Get Analytics on Your Links</h4>
-          <p>
-            With the GooLink API, you are also provided with comprehensive
-            analytics (Charts, Graphs, Tables) on user interaction with your
-            links.
-          </p>
-          <button className={classes.disabled}>Coming Soon...</button>
-        </div>
-        <div className={classes.analytics__right}>
-          <img src={charts} alt="charts" />
+        <div className={classes.analytics}>
+          <div className={classes.analytics__left}>
+            <h4>Get Analytics on Your Links</h4>
+            <p>
+              With the GooLink API, you are also provided with comprehensive
+              analytics (Charts, Graphs, Tables) on user interaction with your
+              links.
+            </p>
+            <button className={classes.disabled}>Coming Soon...</button>
+          </div>
+          <div className={classes.analytics__right}>
+            <img src={charts} alt="charts" />
+          </div>
         </div>
       </div>
     </>
