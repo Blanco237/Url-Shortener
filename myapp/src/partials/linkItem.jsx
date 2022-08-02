@@ -47,7 +47,7 @@ const LinkItem = ({ item }) => {
       <p className={`${classes.linkP} ${classes.short}`}>
         <p>
           <span>Short Link: </span>{" "}
-          <a href={`http://localhost:3000/${item.short_url}`} target="_blanc">
+          <a href={`http://localhost:3000/${item.short_url}`} target="_blank">
             rand.ly/{item.short_url}
           </a>
         </p>

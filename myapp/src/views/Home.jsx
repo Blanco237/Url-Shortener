@@ -56,15 +56,13 @@ const Home = () => {
       }
     );
     if (result.data.error) {
-      alert(result.data.error);
+      handleAlert(result.data.error);
     } else {
       console.log(result.data);
       addLink(result.data);
       setUrl("");
     }
     handleLoading(false);
-    handleAlert("Url REduced wai");
-    console.log("Changing alert");
   };
 
   return (
