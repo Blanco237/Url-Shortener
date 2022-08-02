@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import UserProvider from './providers/UserProvider'
 import AlertProvider from './providers/AlertProvider';
 import LoadingProvider from './providers/LoadingProvider';
+import LinkProvider from './providers/LinkProvider';
 
 
 import Footer from './components/Footer';
@@ -32,19 +33,22 @@ const App = () => {
             <UserProvider>
                 <LoadingProvider>
                     <AlertProvider>
-                        <Router>
-                            <Alert />
-                            <Loading />
-                            <Header />
-                            <Switch>
-                                <Route exact path="/" component={Home} element={<Home />} />
-                                <Route exact path="/login" component={Login} element={<Login />} />
-                                <Route exact path="/register" component={Register} element={<Register />} />
-                                <Route exact path="/faqs" component={Faq} element={<Faq />} />
-                                <Route exact path="/dashboard" component={Dashboard} element={<Dashboard />} />
-                            </Switch>
-                            <Footer />
-                        </Router>
+                        <LinkProvider >
+                            <Router>
+                                <Alert />
+                                <Loading />
+                                <Header />
+                                <Switch>
+                                    <Route exact path="/" component={Home} element={<Home />} />
+                                    <Route exact path="/login" component={Login} element={<Login />} />
+                                    <Route exact path="/register" component={Register} element={<Register />} />
+                                    <Route exact path="/faqs" component={Faq} element={<Faq />} />
+                                    <Route exact path="/dashboard" component={Dashboard} element={<Dashboard />} />
+                                    <Route path="/:short_url" element={<Faq />} component={Faq}/>
+                                </Switch>
+                                <Footer />
+                            </Router>
+                        </LinkProvider>
                     </AlertProvider>
                 </LoadingProvider>
             </UserProvider>

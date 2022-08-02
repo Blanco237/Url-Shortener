@@ -36,21 +36,22 @@
 }
 
 .mobile{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     position: absolute;
     left: -999px;
-    top: 8.3vh;
+    top: 4rem;
     width: 92%;
     background-color: var(--main-color);
-    padding: 0.3rem 1rem;
+    padding: 0.7rem 1rem;
     border-top: 1px solid var(--main-accent);
     border-bottom: 2px solid var(--main-accent);
     transition: left 0.5s ease-in-out;
 }
 .mobile>li{
     border-bottom: 1px solid white;
-    margin-bottom: 5px;
-    padding-bottom: 3px;
+    padding: 0.2rem 0.5rem;
 }
 
 .show{

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { UserContext } from '../UserProvider';
+import { UserContext } from '../providers/UserProvider';
 import classes from '../assets/styles/components/data.module.css'
 import { saveUserInfo } from '../firebaseUtils';
 import { useHistory } from 'react-router-dom'

@@ -102,12 +102,11 @@
     border-radius: 5px;
     margin-top: 5px;
     width: 83%;
-    /* margin-left: 6rem; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* gap: 1px; */
+    gap: 1rem;
 }
 
 .linkItem:not(:last-of-type){
@@ -116,15 +115,10 @@
 
 .linkItem{
     text-align: left;
-    /* font-size: 0.9px; */
 }
 .linkItem>p>span{
     font-weight: bold;
-    /* font-size: 2rem; */
 }
-
-
-
 
 .createAccount{
     display: flex;
@@ -239,11 +233,9 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        justify-items: center;
     }
     .input__link{
         width: 90%;
-        height: 30px;
         font-size: 0.9rem;
     }
     .input__button{
@@ -267,20 +259,14 @@
     .banner__img{
         width: 80%;
     }
-    .body{
-        margin-top: 3rem;
-    }
     .previous__links{
         width: 90%;
-        margin-left: 0.7rem;
         font-size: 0.9rem;
         overflow: hidden;
-        /* background-color: blue; */
         padding-inline: 5px;
     }
     .linkP{
        font-size: 0.8rem;
-        /* font-weight: bolder; */
     }
 }
 

@@ -1,26 +1,113 @@
 .linkItem {
-    display: flex;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.linkItem p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.linkItem {
+  border-bottom: 2px solid var(--main-accent);
+}
+
+.linkItem {
+  text-align: left;
+  text-overflow: ellipsis;
+}
+.linkItem > p > span {
+  font-weight: bold;
+}
+
+.short > p > span {
+  font-weight: bold;
+}
+
+.short {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.short > button {
+  margin-left: 1rem;
+  background-color: var(--main-accent);
+  border: none;
+  padding: 0.3rem 0.5rem;
+  color: var(--gray-100);
+  border-radius: 3px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.short > button:hover {
+  opacity: 0.9;
+}
+
+.linkP {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 60%;
+  overflow: hidden;
+}
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--main-dark);
+  color: var(--gray-100);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+[data-tooltip=""]::after {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .linkItem {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+  .linkP {
     width: 100%;
-    justify-content: space-between;
-}
-
-.linkItem{
-    border-bottom: 2px solid var(--main-accent);
-}
-
-.linkItem{
-    text-align: left;
     text-overflow: ellipsis;
-    /* font-size: 0.9px; */
-}
-.linkItem>p>span{
+    padding: 0 0.3rem;
+    overflow: hidden;
+  }
+  .short {
+    flex-direction: column;
+    /* width: 100%; */
+    gap: 0.6rem;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .short > button {
+    width: 100%;
+    margin-left: 0;
+  }
+  .linkItem p > span {
     font-weight: bold;
-    /* font-size: 2rem; */
-}
-
-@media screen and (max-width: 600px){
-    .linkP{
-        font-size: 0.8rem;
-         /* font-weight: bolder; */
-     }
+    display: none;
+  }
+  [data-tooltip]::after{
+    width: 100%;
+  }
 }
