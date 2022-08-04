@@ -7,8 +7,11 @@ import { FaCopy } from "react-icons/fa";
 const LinkItem = ({ item }) => {
   const [text, setText] = React.useState("");
 
+  const domain = window.location.protocol+'//'+window.location.host;
+  console.log(domain);
+
   const copy = async () => {
-    let slug = `http://localhost:3000/${item.short_url}`;
+    let slug = `${domain}/${item.short_url}`;
     if (navigator.clipboard && window.isSecureContext) {
       try {
         await navigator.clipboard.writeText(slug);
@@ -48,8 +51,8 @@ const LinkItem = ({ item }) => {
       <p className={`${classes.linkP} ${classes.short}`}>
         <p>
           <span>Short Link: </span>{" "}
-          <a href={`http://localhost:3000/${item.short_url}`} target="_blank">
-            rand.ly/{item.short_url}
+          <a href={`${domain}/${item.short_url}`} target="_blank">
+            {window.location.host+'/'+item.short_url}
           </a>
         </p>
         <button onClick={copy} data-tooltip={text}>

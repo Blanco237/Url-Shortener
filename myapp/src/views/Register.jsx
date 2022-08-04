@@ -9,11 +9,14 @@ import { register } from "../apis/Auth";
 import { AlertContext } from "../providers/AlertProvider";
 import { LoadingContext } from "../providers/LoadingProvider";
 import { UserContext } from "../providers/UserProvider";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
   const { handleAlert } = useContext(AlertContext);
   const { handleLoading } = useContext(LoadingContext);
   const { user, updateUser } = useContext(UserContext);
+
+  const history = useHistory();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -69,6 +72,7 @@ const Register = () => {
         return;
       }
       updateUser(res);
+      history.push("/");
     }
     handleLoading(false);
   };

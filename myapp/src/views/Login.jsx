@@ -39,7 +39,11 @@ const Login = () => {
       return;
     }
     updateUser(res);
+    redirect();
     handleLoading(false);
+  }
+  const redirect = () => {
+    history.push('/');
   }
 
   return (
