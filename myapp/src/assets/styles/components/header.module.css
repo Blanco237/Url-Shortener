@@ -28,11 +28,12 @@
 .links>li{
     cursor: pointer;
     transition-property: border-bottom;
-    transition-duration: 2s;
+    transition-duration: 500ms;
+    border-bottom: 2px solid transparent;
 }
 
 .links>li:hover{
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid white;
 }
 
 .mobile{
