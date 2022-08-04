@@ -3,54 +3,32 @@ import { useHistory } from 'react-router-dom'
 
 import classes from "../assets/styles/views/auth.module.css";
 
-import { UserContext } from "../providers/UserProvider";
-
 import logo from "../assets/images/GoogleLogo.svg";
-import { googleSignIn, signIn } from "../firebaseUtils";
+
+import { loginUser } from '../apis/Auth'
 
 const Login = () => {
 //   const navigate = useNavigate();
   const history = useHistory();
 
-  const { setUser } = React.useContext(UserContext);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function checkValidEntry() {
-    if (email.length < 0 || password.length < 0) {
-      return false;
+  const handleSubmit = async (type) => {
+    if(email.length<0 || password.length<0){
+      alert("Please fill all fields");
     }
-    let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    return regex.test(email);
-  }
-
-  function loginUser() {
-    if (!checkValidEntry()) {
-      alert("Please Enter Data Correctly");
-      setEmail("");
-      setPassword("");
-      return;
+    const data = {
+      email, password
     }
-    signIn(email, password);
-  }
-
-  async function loginWithGoogle() {
-    let size = window.innerWidth;
-    let state = size < 600 ? "mobile" : "desktop";
-    let user = await googleSignIn(state);
-    if (user) {
-      setUser(user);
-      console.log('From Login: ', user);
-      history.push('/dashboard');
-    }
+    await loginUser(data,type);
   }
 
   return (
     <div className={classes.body}>
       <div className={classes.form__container}>
         <h3>GooLnk Login</h3>
-        <div className={classes.form__google} onClick={loginWithGoogle}>
+        <div className={classes.form__google} onClick={() => handleSubmit('google')}>
           <img src={logo} />
           <p>Login with Google</p>
         </div>
@@ -70,7 +48,7 @@ const Login = () => {
             value={password}
             placeholder="Enter Your Password..."
           />
-          <button type="submit" onClick={loginUser}>
+          <button type="submit" onClick={handleSubmit}>
             Submit
           </button>
         </form>

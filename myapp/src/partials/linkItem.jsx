@@ -8,9 +8,10 @@ const LinkItem = ({ item }) => {
   const [text, setText] = React.useState("");
 
   const copy = async () => {
+    let slug = `http://localhost:3000/${item.short_url}`;
     if (navigator.clipboard && window.isSecureContext) {
       try {
-        await navigator.clipboard.writeText(item.short_url);
+        await navigator.clipboard.writeText(slug);
         setText("Copied");
         setTimeout(() => {
           setText("");
@@ -21,7 +22,7 @@ const LinkItem = ({ item }) => {
     }
     else{
         let textArea = document.createElement("textarea");
-        textArea.value = item.short_url;
+        textArea.value = slug;
         // make the textarea out of viewport
         textArea.style.position = "fixed";
         textArea.style.left = "-999999px";
