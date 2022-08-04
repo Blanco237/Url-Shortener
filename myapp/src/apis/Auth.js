@@ -5,7 +5,7 @@ const domain = 'http://localhost:5500';
 
 async function loginWithGoogle() {
     let size = window.innerWidth;
-    let state = size < 600 ? "mobile" : "desktop";
+    let state = size < 768 ? "mobile" : "desktop";
     let user = await googleSignIn(state);
     return user ? user : { error: 'User not found' };
 }
@@ -17,19 +17,29 @@ export async function loginUser(data, type) {
         if (res.error) {
             return { error: res.error };
         }
-        const result = await axios.post(`${domain}/users/login/google`, res);
-        if (result.data.error) {
-            return { error: result.data.error };
+        try{
+            const result = await axios.post(`${domain}/users/login/google`, res);
+            if (result.data.error) {
+                return { error: result.data.error };
+            }
+            user = result.data;
+        }catch(e){
+            return { error: e.message };
         }
-        user = result.data;
     }
     else {
-        const result = await axios.post(`${domain}/users/login`, data);
-        if (result.data.error) {
-            return { error: result.data.error };
+        try{
+
+            const result = await axios.post(`${domain}/users/login`, data);
+            if (result.data.error) {
+                return { error: result.data.error };
+            }
+            user = result.data;
+        }catch(e){
+            return { error: e.message };
         }
-        user = result.data;
     }
+    return user;
 }
 
 
@@ -60,7 +70,14 @@ export async function register(data, type) {
     }
     else {
         try {
-            console.log(data);
+            const userCheck = await axios.post(`${domain}/users/check/username`, data);
+            if (userCheck.data.error) {
+                return { error: userCheck.data.error };
+            }
+            const emailCheck = await axios.post(`${domain}/users/check/email`, data);
+            if (emailCheck.data.error) {
+                return { error: emailCheck.data.error };
+            }
             const result = await axios.post(`${domain}/users/register`, data);
             if (result.data.error) {
                 return { error: result.data.error };
@@ -70,4 +87,5 @@ export async function register(data, type) {
             return { error: e.message };
         }
     }
+    return user;
 }

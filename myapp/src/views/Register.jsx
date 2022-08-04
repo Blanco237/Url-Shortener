@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import classes from "../assets/styles/views/auth.module.css";
 
@@ -8,16 +8,22 @@ import { register } from "../apis/Auth";
 
 import { AlertContext } from "../providers/AlertProvider";
 import { LoadingContext } from "../providers/LoadingProvider";
+import { UserContext } from "../providers/UserProvider";
 
 const Register = () => {
   const { handleAlert } = useContext(AlertContext);
   const { handleLoading } = useContext(LoadingContext);
+  const { user, updateUser } = useContext(UserContext);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhone] = useState(null);
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+
+  useEffect(() => {
+    if(user) console.log(user);
+  }, []);
 
   function checkValidEntry() {
     if (email.length < 0 || password.length < 0) {
@@ -35,10 +41,12 @@ const Register = () => {
     if (type === "google") {
       const res = await register({}, type);
       console.log(res);
-      if (res.error) {
+      if (res?.error) {
         handleLoading(false);
         handleAlert(res.error);
+        return;
       }
+      updateUser(res);
     } else {
       if (!checkValidEntry()) {
         handleLoading(false);
@@ -55,10 +63,12 @@ const Register = () => {
         password,
       };
       const res = await register(data, type);
-      if (res.error) {
+      if (res?.error) {
         handleLoading(false);
         handleAlert(res.error);
+        return;
       }
+      updateUser(res);
     }
     handleLoading(false);
   };
@@ -76,7 +86,7 @@ const Register = () => {
         </div>
         <form
           className={classes.form}
-          autocomplete="off"
+          autoComplete="off"
           onSubmit={(e) => e.preventDefault()}
         >
           <input

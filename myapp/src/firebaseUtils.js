@@ -41,16 +41,6 @@ export async function createUser(email,password){
     }
 }
 
-export async function signIn(email,password){
-    try{
-        let userCredentials = await signInWithEmailAndPassword(auth,email,password);
-        return userCredentials.user;
-    }
-    catch(error){
-        alert(`${error.code} ::: ${error.message}`);
-        return false;
-    }
-}
 
 export async function googleSignIn(state){
     try{
@@ -67,8 +57,7 @@ export async function googleSignIn(state){
         }
     }
     catch(error){
-        alert("Sign In Error");
-        console.log(`${error.code} ::: ${error.message}`);
+        return error
     }
 }
 

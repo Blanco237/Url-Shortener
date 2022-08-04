@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from 'react-router-dom'
 
 import classes from "../assets/styles/views/auth.module.css";
@@ -7,21 +7,39 @@ import logo from "../assets/images/GoogleLogo.svg";
 
 import { loginUser } from '../apis/Auth'
 
+import { AlertContext } from '../providers/AlertProvider';
+import { LoadingContext } from '../providers/LoadingProvider';
+import { UserContext } from '../providers/UserProvider';
+
 const Login = () => {
-//   const navigate = useNavigate();
+
+  const { handleAlert } = useContext(AlertContext);
+  const { handleLoading } = useContext(LoadingContext);
+  const { updateUser } = useContext(UserContext);
+
   const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (type) => {
+    handleLoading(true);
     if(email.length<0 || password.length<0){
-      alert("Please fill all fields");
+      handleAlert("Please fill all fields");
+      handleLoading(false);
+      return;
     }
     const data = {
       email, password
     }
-    await loginUser(data,type);
+    const res = await loginUser(data,type);
+    if(res.error){
+      handleAlert(res.error);
+      handleLoading(false);
+      return;
+    }
+    updateUser(res);
+    handleLoading(false);
   }
 
   return (
@@ -32,7 +50,7 @@ const Login = () => {
           <img src={logo} />
           <p>Login with Google</p>
         </div>
-        <form className={classes.form} autocomplete="off">
+        <form className={classes.form} autocomplete="off" onSubmit={(e)=>e.preventDefault()}>
           <input
             type="text"
             name="email"
