@@ -20,7 +20,6 @@ const Alert = () => {
 
   useEffect(() => {
     setTime(100);
-    console.log(time);
   }, [showAlert]);
 
   useEffect(() => {

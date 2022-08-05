@@ -1,7 +1,7 @@
 import { googleSignIn } from "../firebaseUtils";
 import axios from 'axios';
 
-const domain = 'http://localhost:5500';
+const domain = 'http://randly-server.herokuapp.com';
 
 async function loginWithGoogle() {
     let size = window.innerWidth;
