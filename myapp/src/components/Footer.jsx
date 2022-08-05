@@ -7,12 +7,11 @@ const Footer = () => {
         <footer>
             <div>
                 <div className={classes.footer__logo}>
-                    <h4>GooLnk</h4>
+                    <h4>Randly</h4>
                     <p>A simple Url Shortener</p>
                 </div>
                 <div className={classes.authors}>
-                    Developed by <span className={classes.special1}>Blanco</span><br></br>
-                    Powered by <span className={classes.special2}><a>RapidAPI</a></span>
+                    Developed by <a href='https://github.com/Blanco237' target="_blank" className={classes.special1}>Blanco</a><br></br>
                 </div>
             </div>
         </footer>
